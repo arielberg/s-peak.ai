@@ -3,7 +3,7 @@ const CFG = Object.assign(
     talkMode: 'elevenlabs',
     talkConfigUrl: 'https://mcp.w3b.works/api/talk/config',
     elevenLabsAgentId: '',
-    mailEndpoint: 'https://me.w3b.works/mail',
+    contactApiUrl: 'https://162-35-181-76.sslip.io:8443/api/contact',
     source: 's-peak.ai',
   },
   window.SPEAK_CONFIG || {}
@@ -516,18 +516,39 @@ document.addEventListener('DOMContentLoaded', () => {
       statusMessage.className = 'status-message status-info';
     }
 
+    const name = document.getElementById('name')?.value?.trim() || '';
+    const email = document.getElementById('email')?.value?.trim() || '';
+    const company = document.getElementById('company')?.value?.trim() || '';
+    const message = document.getElementById('message')?.value?.trim() || '';
+    const source = CFG.source || 's-peak.ai';
+
+    const mailMessage = [
+      `Source: ${source}`,
+      company ? `Company: ${company}` : '',
+      '',
+      message,
+    ]
+      .filter((line, i, arr) => !(line === '' && arr[i - 1] === ''))
+      .join('\n')
+      .trim();
+
     const body = {
-      name: document.getElementById('name')?.value || '',
-      email: document.getElementById('email')?.value || '',
-      company: document.getElementById('company')?.value || '',
-      message: document.getElementById('message')?.value || '',
-      source: CFG.source || 's-peak.ai',
+      name: name || source,
+      email,
+      message: mailMessage,
+      website: '',
     };
 
+    const endpoint =
+      CFG.contactApiUrl ||
+      CFG.mailEndpoint ||
+      'https://162-35-181-76.sslip.io:8443/api/contact';
+
     try {
-      const resp = await fetch(CFG.mailEndpoint || 'https://me.w3b.works/mail', {
+      // text/plain avoids a CORS preflight; the contact API still parses JSON.
+      const resp = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
         body: JSON.stringify(body),
       });
       const data = await resp.json().catch(() => ({}));
