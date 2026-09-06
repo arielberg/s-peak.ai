@@ -1,8 +1,10 @@
 const CFG = Object.assign(
   {
-    talkMode: 'elevenlabs',
+    talkMode: 'auto',
     talkConfigUrl: 'https://mcp.w3b.works/api/talk/config',
     elevenLabsAgentId: 'agent_6101kw9b2sq2e3nvhyb8kx4mze2c',
+    apiBase: 'https://162-35-181-76.sslip.io:8443',
+    webrtcUserId: 'shiri',
     contactApiUrl: 'https://162-35-181-76.sslip.io:8443/api/contact',
     source: 's-peak.ai',
   },
@@ -312,7 +314,7 @@ const talkStatusEl = document.getElementById('talkStatus');
 let talkActive = false;
 let talkBusy = false;
 let talkStatusKey = 'demo.ready';
-const rtc = { conversation: null, mode: null };
+const rtc = { conversation: null, simpleUser: null, localStream: null, mode: null };
 
 function setTalkStatus(key) {
   talkStatusKey = key;
@@ -392,9 +394,10 @@ async function fetchTalkToken(config) {
 
 async function loadElevenLabsClient() {
   const version = '0.16.0';
+  // esm.sh first — jsdelivr fails on bare livekit-client imports in the browser.
   const urls = [
-    `https://cdn.jsdelivr.net/npm/@elevenlabs/client@${version}/dist/lib.modern.js`,
     `https://esm.sh/@elevenlabs/client@${version}`,
+    `https://cdn.jsdelivr.net/npm/@elevenlabs/client@${version}/dist/lib.modern.js`,
   ];
   let lastErr;
   for (const url of urls) {
@@ -409,15 +412,95 @@ async function loadElevenLabsClient() {
   throw lastErr || new Error('elevenlabs_client_unavailable');
 }
 
+async function loadSipSimpleUser() {
+  const urls = [
+    'https://cdn.jsdelivr.net/npm/sip.js@0.21.2/lib/platform/web/simple-user/simple-user.js/+esm',
+    'https://cdn.jsdelivr.net/npm/sip.js@0.21.2/lib/platform/web/index.js/+esm',
+  ];
+  let lastErr;
+  for (const url of urls) {
+    try {
+      const mod = await import(url);
+      const SimpleUser = mod.SimpleUser || mod.default?.SimpleUser || mod.default;
+      if (typeof SimpleUser === 'function') return SimpleUser;
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+  throw lastErr || new Error('sipjs_unavailable');
+}
+
+function apiBase() {
+  return String(CFG.apiBase || '').replace(/\/$/, '');
+}
+
+function getPeerConnection(simpleUser) {
+  return (
+    simpleUser?.session?.sessionDescriptionHandler?.peerConnection ||
+    simpleUser?.sessionManager?.managedSessions?.[0]?.session?.sessionDescriptionHandler
+      ?.peerConnection ||
+    null
+  );
+}
+
+async function attachLiveMic(simpleUser, stream) {
+  const track = stream?.getAudioTracks?.()?.[0];
+  if (!track) return false;
+  track.enabled = true;
+  const pc = getPeerConnection(simpleUser);
+  if (!pc || typeof pc.getSenders !== 'function') return false;
+  const sender = pc.getSenders().find((s) => !s.track || s.track.kind === 'audio');
+  if (sender && typeof sender.replaceTrack === 'function') {
+    await sender.replaceTrack(track);
+    return true;
+  }
+  return Boolean(sender);
+}
+
+function stopLocalStream() {
+  const stream = rtc.localStream;
+  rtc.localStream = null;
+  if (!stream) return;
+  stream.getTracks().forEach((tr) => {
+    try {
+      tr.stop();
+    } catch {
+      /* ignore */
+    }
+  });
+}
+
 async function cleanupRtc() {
   const conversation = rtc.conversation;
+  const user = rtc.simpleUser;
   rtc.conversation = null;
+  rtc.simpleUser = null;
   rtc.mode = null;
   talkActive = false;
   setTalkUi(false);
+  stopLocalStream();
+
   if (conversation) {
     try {
       await conversation.endSession().catch(() => {});
+    } catch {
+      /* ignore */
+    }
+  }
+
+  if (user) {
+    try {
+      await user.hangup().catch(() => {});
+    } catch {
+      /* ignore */
+    }
+    try {
+      await user.unregister().catch(() => {});
+    } catch {
+      /* ignore */
+    }
+    try {
+      await user.disconnect().catch(() => {});
     } catch {
       /* ignore */
     }
@@ -476,6 +559,146 @@ async function startElevenLabsTalk() {
   if (conversation.isOpen?.()) markTalkLive();
 }
 
+async function startSipTalk() {
+  const base = apiBase();
+  if (!base) {
+    const err = new Error('sip_not_configured');
+    err.status = 503;
+    throw err;
+  }
+
+  const userId = encodeURIComponent(CFG.webrtcUserId || 'shiri');
+  const statusRes = await fetch(`${base}/api/public/web-call/${userId}/status`);
+  if (!statusRes.ok) {
+    const err = new Error('webrtc unavailable');
+    err.status = statusRes.status;
+    throw err;
+  }
+
+  const sessionRes = await fetch(`${base}/api/public/web-call/${userId}/session`, {
+    method: 'POST',
+  });
+  if (!sessionRes.ok) {
+    const err = new Error('session failed');
+    err.status = sessionRes.status;
+    throw err;
+  }
+  const session = await sessionRes.json();
+  if (session.mode !== 'sipjs' || !session.wsUrl || !session.sipPassword) {
+    const err = new Error('unexpected session mode');
+    err.status = 503;
+    throw err;
+  }
+
+  const SimpleUser = await loadSipSimpleUser();
+  const domain = session.sipDomain || new URL(base).hostname;
+  const sipUser = session.sipUser || 'speak_guest';
+  const aor = session.sipUri || `sip:${sipUser}@${domain}`;
+  const dial = session.dial || 'weblabs';
+  const target = dial.includes('@') ? dial : `sip:${dial}@${domain}`;
+  const remoteAudio = document.getElementById('remoteAudio');
+
+  let localStream;
+  try {
+    localStream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+      },
+      video: false,
+    });
+  } catch {
+    const err = new Error('microphone_denied');
+    err.status = 503;
+    throw err;
+  }
+  rtc.localStream = localStream;
+
+  const simpleUser = new SimpleUser(session.wsUrl, {
+    aor,
+    media: {
+      constraints: { audio: true, video: false },
+      remote: remoteAudio ? { audio: remoteAudio } : undefined,
+    },
+    userAgentOptions: {
+      authorizationUsername: sipUser,
+      authorizationPassword: session.sipPassword,
+      sessionDescriptionHandlerFactoryOptions: {
+        constraints: { audio: true, video: false },
+        peerConnectionConfiguration: {
+          iceServers: session.iceServers || [{ urls: 'stun:stun.l.google.com:19302' }],
+        },
+      },
+    },
+  });
+
+  rtc.simpleUser = simpleUser;
+  rtc.mode = 'sipjs';
+
+  simpleUser.delegate = {
+    onCallAnswered: () => {
+      attachLiveMic(simpleUser, localStream).catch(() => {});
+      try {
+        if (remoteAudio) {
+          remoteAudio.muted = false;
+          remoteAudio.volume = 1;
+          remoteAudio.play()?.catch?.(() => {});
+        }
+      } catch {
+        /* ignore */
+      }
+      markTalkLive();
+    },
+    onCallHangup: () => {
+      hangupTalk(false);
+    },
+    onServerDisconnect: () => {
+      hangupTalk(false);
+    },
+  };
+
+  await simpleUser.connect();
+  await simpleUser.register();
+  await simpleUser.call(target);
+  await attachLiveMic(simpleUser, localStream).catch(() => {});
+  setTimeout(() => attachLiveMic(simpleUser, localStream).catch(() => {}), 400);
+  setTimeout(() => attachLiveMic(simpleUser, localStream).catch(() => {}), 1200);
+  try {
+    if (remoteAudio) {
+      remoteAudio.muted = false;
+      await remoteAudio.play().catch(() => {});
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
+function talkMode() {
+  return String(CFG.talkMode || 'auto').trim().toLowerCase();
+}
+
+async function startLiveTalk() {
+  const mode = talkMode();
+  if (mode === 'sipjs') {
+    await startSipTalk();
+    return;
+  }
+  if (mode === 'elevenlabs') {
+    await startElevenLabsTalk();
+    return;
+  }
+
+  // auto: prefer ElevenLabs when configured, fall back to SIP web-call
+  try {
+    await startElevenLabsTalk();
+  } catch (err) {
+    console.warn('[speak demo] elevenlabs failed, trying sipjs', err);
+    await cleanupRtc();
+    await startSipTalk();
+  }
+}
+
 async function startTalk() {
   if (talkBusy) return;
   if (talkActive) {
@@ -493,18 +716,24 @@ async function startTalk() {
       err.status = 503;
       throw err;
     }
-    await startElevenLabsTalk();
-    if (!talkActive) markTalkLive();
+    await startLiveTalk();
+    if (!talkActive && rtc.mode === 'elevenlabs') markTalkLive();
+    if (!talkActive && rtc.mode === 'sipjs') setTalkStatus('demo.connecting');
   } catch (err) {
     console.warn('[speak demo] failed', err);
     await cleanupRtc();
-    if (err?.name === 'NotAllowedError' || err?.message === 'microphone_denied') {
+    const msg = String(err?.message || '');
+    if (err?.name === 'NotAllowedError' || msg === 'microphone_denied') {
       setTalkStatus('demo.micDenied');
     } else if (
       err?.status === 404 ||
       err?.status === 503 ||
-      err?.message === 'agent_id_missing' ||
-      err?.message === 'elevenlabs_client_unavailable'
+      msg.includes('404') ||
+      msg === 'agent_id_missing' ||
+      msg === 'elevenlabs_client_unavailable' ||
+      msg === 'sipjs_unavailable' ||
+      msg === 'sip_not_configured' ||
+      msg === 'webrtc unavailable'
     ) {
       setTalkStatus('demo.unavailable');
     } else {
