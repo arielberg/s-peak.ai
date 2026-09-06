@@ -5,17 +5,17 @@
 }
 
 :root {
-  --accent: #0a7a6f;
-  --accent-dark: #065f58;
+  --accent: #078b80;
+  --accent-dark: #056860;
   --accent-on-dark: #5eead4;
   --accent-tint: #e6f5f3;
-  --ink: #0b1220;
+  --ink: #0b172a;
   --ink-soft: #334155;
   --line: #cbd5e1;
   --surface: #ffffff;
   --canvas: #ffffff;
   --muted: #f1f5f9;
-  --footer: #0b1220;
+  --footer: #0b172a;
   --radius: 12px;
   --shadow-sm: 0 1px 0 var(--line);
   --shadow-md: 0 2px 0 var(--line);
@@ -74,7 +74,7 @@ body {
 }
 
 .logo-svg {
-  height: 40px;
+  height: 44px;
   width: auto;
   display: block;
 }
@@ -86,18 +86,18 @@ body {
 }
 
 .logo-bars rect:nth-child(1) { animation-delay: 0s; }
-.logo-bars rect:nth-child(2) { animation-delay: 0.1s; }
-.logo-bars rect:nth-child(3) { animation-delay: 0.2s; }
-.logo-bars rect:nth-child(4) { animation-delay: 0.3s; }
-.logo-bars rect:nth-child(5) { animation-delay: 0.4s; }
+.logo-bars rect:nth-child(2) { animation-delay: 0.08s; }
+.logo-bars rect:nth-child(3) { animation-delay: 0.16s; }
+.logo-bars rect:nth-child(4) { animation-delay: 0.24s; }
+.logo-bars rect:nth-child(5) { animation-delay: 0.32s; }
+.logo-bars rect:nth-child(6) { animation-delay: 0.4s; }
 
 .logo:hover .logo-bars rect {
   animation-duration: 0.55s;
 }
 
 .logo-svg--footer {
-  height: 36px;
-  color: #fff;
+  height: 40px;
 }
 
 .nav-menu {
