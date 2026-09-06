@@ -69,35 +69,60 @@ body {
 .logo {
   display: flex;
   align-items: center;
+  gap: 0.7rem;
   text-decoration: none;
   color: var(--ink);
 }
 
-.logo-svg {
-  height: 44px;
-  width: auto;
+.logo-mark {
+  width: 42px;
+  height: 42px;
   display: block;
+  flex-shrink: 0;
 }
 
-.logo-bars rect {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: logo-bar 1.5s ease-in-out infinite;
+.logo-word {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
 }
 
-.logo-bars rect:nth-child(1) { animation-delay: 0s; }
-.logo-bars rect:nth-child(2) { animation-delay: 0.08s; }
-.logo-bars rect:nth-child(3) { animation-delay: 0.16s; }
-.logo-bars rect:nth-child(4) { animation-delay: 0.24s; }
-.logo-bars rect:nth-child(5) { animation-delay: 0.32s; }
-.logo-bars rect:nth-child(6) { animation-delay: 0.4s; }
-
-.logo:hover .logo-bars rect {
-  animation-duration: 0.55s;
+.logo-dot {
+  color: var(--accent);
 }
 
-.logo-svg--footer {
-  height: 40px;
+.logo-word--footer {
+  color: #fff;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+
+.brand-mark-img {
+  width: 64px;
+  height: 64px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.brand-word {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--ink);
 }
 
 .nav-menu {
@@ -220,27 +245,6 @@ body {
   grid-template-columns: 1.1fr 0.9fr;
   gap: 3rem;
   align-items: center;
-}
-
-.brand-mark {
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  margin-bottom: 1rem;
-  color: var(--ink);
-}
-
-.brand-mark::after {
-  content: '';
-  display: inline-block;
-  width: 0.45em;
-  height: 0.45em;
-  margin-inline-start: 0.15em;
-  border-radius: 50%;
-  background: var(--accent);
-  vertical-align: 0.1em;
-  animation: pulse-dot 2.2s ease-in-out infinite;
 }
 
 .hero-title {
