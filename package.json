@@ -1,0 +1,12 @@
+{
+  "name": "s-peak-ai-website",
+  "version": "1.0.0",
+  "description": "Marketing site for s-peak.ai — AI voice agents connected to client systems",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve . -p 5173",
+    "dev": "npx --yes live-server --port=5173 --no-browser"
+  },
+  "keywords": ["voice-agents", "ai", "s-peak"],
+  "license": "MIT"
+}
