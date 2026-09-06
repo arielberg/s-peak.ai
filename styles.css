@@ -390,6 +390,11 @@ body {
   font-family: inherit;
 }
 
+.btn[hidden],
+[hidden] {
+  display: none !important;
+}
+
 .btn-primary {
   background: var(--accent);
   color: #fff;

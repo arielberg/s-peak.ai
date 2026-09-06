@@ -2,7 +2,7 @@ const CFG = Object.assign(
   {
     talkMode: 'elevenlabs',
     talkConfigUrl: 'https://mcp.w3b.works/api/talk/config',
-    elevenLabsAgentId: '',
+    elevenLabsAgentId: 'agent_6101kw9b2sq2e3nvhyb8kx4mze2c',
     contactApiUrl: 'https://162-35-181-76.sslip.io:8443/api/contact',
     source: 's-peak.ai',
   },
@@ -339,13 +339,39 @@ function resolveTalkTokenUrl(config) {
 }
 
 async function fetchTalkConfig() {
-  const res = await fetch(talkConfigUrl());
-  if (!res.ok) {
-    const err = new Error('talk config failed');
-    err.status = res.status;
-    throw err;
+  const fallback = () => {
+    const agentId = String(CFG.elevenLabsAgentId || '').trim();
+    if (!agentId) {
+      const err = new Error('talk_not_configured');
+      err.status = 503;
+      throw err;
+    }
+    return {
+      ok: true,
+      mode: 'elevenlabs',
+      agentId,
+      connectionType: 'webrtc',
+      auth: 'public',
+    };
+  };
+
+  try {
+    const res = await fetch(talkConfigUrl());
+    if (!res.ok) {
+      if (res.status === 404 || res.status === 503) return fallback();
+      const err = new Error('talk config failed');
+      err.status = res.status;
+      throw err;
+    }
+    const body = await res.json().catch(() => ({}));
+    if (body?.error === 'talk_not_configured' || !body?.agentId) {
+      return fallback();
+    }
+    return body;
+  } catch (err) {
+    if (err?.status && err.status !== 404 && err.status !== 503) throw err;
+    return fallback();
   }
-  return res.json();
 }
 
 async function fetchTalkToken(config) {
