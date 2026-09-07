@@ -6,7 +6,7 @@
   <title>s-peak.ai | AI Voice Agents Connected to Your Systems</title>
   <meta name="description" content="AI voice agents that speak with your customers and connect to CRM, ERP, telephony, and internal systems — in Hebrew and English.">
   <link rel="icon" href="logo-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=logo4">
+  <link rel="stylesheet" href="styles.css?v=nav1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
           <img src="logo-mark.svg" alt="" class="logo-mark" width="120" height="120">
           <span class="logo-word">s-peak<span class="logo-dot">.ai</span></span>
         </a>
-        <ul class="nav-menu">
+        <ul class="nav-menu" id="navMenu">
           <li><a href="#demo" data-i18n="nav.demo">Live demo</a></li>
           <li><a href="#capabilities" data-i18n="nav.capabilities">Capabilities</a></li>
           <li><a href="#connect" data-i18n="nav.connect">Connections</a></li>
@@ -29,7 +29,7 @@
         <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
           <span id="langText">עברית</span>
         </button>
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
           <span></span>
           <span></span>
           <span></span>

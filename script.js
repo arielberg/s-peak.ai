@@ -237,25 +237,24 @@ const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 const navbar = document.querySelector('.navbar');
 
+function setNavOpen(open) {
+  if (!navMenu || !navToggle) return;
+  navMenu.classList.toggle('active', open);
+  navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  const spans = navToggle.querySelectorAll('span');
+  spans[0].style.transform = open ? 'rotate(45deg) translate(5px, 5px)' : 'none';
+  spans[1].style.opacity = open ? '0' : '1';
+  spans[2].style.transform = open ? 'rotate(-45deg) translate(5px, -5px)' : 'none';
+}
+
 if (navToggle && navMenu) {
   navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    const spans = navToggle.querySelectorAll('span');
-    const open = navMenu.classList.contains('active');
-    spans[0].style.transform = open ? 'rotate(45deg) translate(5px, 5px)' : 'none';
-    spans[1].style.opacity = open ? '0' : '1';
-    spans[2].style.transform = open ? 'rotate(-45deg) translate(5px, -5px)' : 'none';
+    setNavOpen(!navMenu.classList.contains('active'));
   });
 }
 
 document.querySelectorAll('.nav-menu a').forEach((link) => {
-  link.addEventListener('click', () => {
-    navMenu?.classList.remove('active');
-    navToggle?.querySelectorAll('span').forEach((s) => {
-      s.style.transform = 'none';
-      s.style.opacity = '1';
-    });
-  });
+  link.addEventListener('click', () => setNavOpen(false));
 });
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
