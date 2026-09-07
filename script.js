@@ -204,15 +204,15 @@ const translations = {
   },
 };
 
-let currentLang = localStorage.getItem('speak-lang') || 'en';
+let currentLang = localStorage.getItem('speak-lang-v2') || 'he';
 
 function t(key) {
-  return translations[currentLang]?.[key] || translations.en[key] || key;
+  return translations[currentLang]?.[key] || translations.he[key] || translations.en[key] || key;
 }
 
 function setLanguage(lang) {
   currentLang = lang;
-  localStorage.setItem('speak-lang', lang);
+  localStorage.setItem('speak-lang-v2', lang);
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
 
