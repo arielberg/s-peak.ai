@@ -1,5 +1,5 @@
 import { examples } from './examples-catalog.mjs';
-import { ExampleCall } from './examples-call.mjs';
+import { ExampleCall } from './examples-call.mjs?v=2';
 
 const copy = {
   he: {

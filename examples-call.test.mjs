@@ -58,6 +58,28 @@ test('only one call can connect at once; caller-supplied dial cannot override ca
   assert.equal(f.controller.active, null);
 });
 
+test('default fetch adapter does not bind the browser fetch receiver to the controller', async () => {
+  const originalFetch = globalThis.fetch;
+  let requests = 0;
+  globalThis.fetch = function () {
+    // Window.fetch rejects a class instance as its receiver (Illegal invocation).
+    if (this !== undefined && this !== globalThis) throw new TypeError('Illegal invocation');
+    requests++;
+    return Promise.resolve({ ok: true, json: async () => ({
+      mode: 'sipjs', wsUrl: 'wss://example.test', sipPassword: 'test', sipDomain: 'example.test',
+    }) });
+  };
+  const f = fixture({ fetcher: undefined });
+  try {
+    await f.controller.start(examples[0]);
+    assert.equal(requests, 1);
+    assert.equal(f.events.at(-1).state, 'live');
+  } finally {
+    await f.controller.end();
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('cancel during microphone permission stops the late stream without dialing', async () => {
   const media = deferred();
   const f = fixture({ getMedia: () => media.promise });

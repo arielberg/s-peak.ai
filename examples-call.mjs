@@ -18,7 +18,7 @@ async function bounded(fn) {
 // One owner for the microphone, SIP connection and connecting/active call.
 // Dependencies are injectable so cancellation and routing can be tested offline.
 export class ExampleCall {
-  constructor({ apiBase, userId = 'shiri', audio, onState, fetcher = fetch,
+  constructor({ apiBase, userId = 'shiri', audio, onState, fetcher = (...args) => fetch(...args),
     getMedia = (constraints) => navigator.mediaDevices.getUserMedia(constraints), loadSdk = loadSip,
     connectTimeout = 45000 }) {
     Object.assign(this, { apiBase, userId, audio, onState, fetcher, getMedia, loadSdk, connectTimeout });
