@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>דוגמאות לשיחה עם סוכני קול | s-peak.ai</title>
+  <meta name="description" content="נסו שיחה מהדפדפן עם קול קו לתכנון נסיעה בתחבורה ציבורית ועם קפה קליק להזמנת קפה. דוגמאות לסוכני הקול של s-peak.ai.">
+  <link rel="icon" href="logo-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=examples1">
+  <link rel="stylesheet" href="examples.css?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="examples-page">
+  <a class="skip-link" href="#main" data-examples-text="skip">דילוג לתוכן</a>
+  <nav class="navbar" aria-label="ניווט ראשי">
+    <div class="container nav-wrapper">
+      <a href="./" class="logo" aria-label="s-peak.ai">
+        <img src="logo-mark.svg" alt="" class="logo-mark" width="42" height="42">
+        <span class="logo-word" dir="ltr">s-peak<span class="logo-dot">.ai</span></span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="./#demo" data-i18n="nav.demo">הדגמה חיה</a></li>
+        <li><a href="examples.html" aria-current="page" data-i18n="nav.examples">דוגמאות</a></li>
+        <li><a href="./#capabilities" data-i18n="nav.capabilities">יכולות</a></li>
+        <li><a href="./#contact" data-i18n="nav.contact">יצירת קשר</a></li>
+      </ul>
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Toggle language"><span id="langText">English</span></button>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="examples-intro container">
+      <p class="examples-eyebrow" data-examples-text="eyebrow">סוכני הקול של s-peak.ai</p>
+      <h1 data-examples-text="title">בואו לשמוע איך זה עובד.</h1>
+      <p class="examples-lead" data-examples-text="intro">בוחרים דוגמה, מפעילים את המיקרופון ומתחילים לדבר. כל סוכן מכיר עולם אחר — מהדרך לעבודה ועד הקפה של הבוקר.</p>
+      <p class="examples-note"><span class="note-dot" aria-hidden="true"></span><span data-examples-text="note">ישירות מהדפדפן · ללא התקנה · שיחה בעברית</span></p>
+    </header>
+
+    <section class="examples-gallery container" aria-label="דוגמאות לשיחה" id="examplesGallery"></section>
+    <noscript><p class="container">כדי להתחיל שיחה בדפדפן, יש להפעיל JavaScript. אפשר גם <a href="./#contact">ליצור איתנו קשר</a>.</p></noscript>
+
+    <aside class="examples-help container">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 14v-3a8 8 0 0 1 16 0v3M4 13H3v7h4v-7H4Zm16 0h1v7h-4v-7h3Z"/></svg>
+      <p data-examples-text="help">בהתחלת השיחה תתבקשו לאשר גישה למיקרופון. לסיום, לחצו על ״סיום שיחה״. בסביבה רועשת כדאי להשתמש באוזניות.</p>
+    </aside>
+
+    <section class="examples-contact">
+      <div class="container examples-contact-inner">
+        <div><p class="examples-eyebrow" data-examples-text="contactEyebrow">ומה הסוכן שלכם יעשה?</p><h2 data-examples-text="contactTitle">אותה שיחה טבעית. העסק שלכם.</h2><p data-examples-text="contactText">ספרו לנו איזו שיחה תרצו להפוך לפשוטה יותר.</p></div>
+        <a class="btn btn-primary" href="./#contact" data-examples-text="contactAction">בואו נדבר</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="examples-footer container"><a class="logo" href="./" aria-label="s-peak.ai"><span class="logo-word" dir="ltr">s-peak<span class="logo-dot">.ai</span></span></a><p data-i18n="footer.copyright">© 2026 s-peak.ai. כל הזכויות שמורות.</p></footer>
+  <audio id="exampleAudio" autoplay playsinline></audio>
+
+  <template id="exampleCard">
+    <article class="example-card">
+      <div class="example-scene" aria-hidden="true"><span class="example-number"></span><svg class="example-illustration" viewBox="0 0 160 110" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></svg><span class="example-scene-label"></span></div>
+      <div class="example-body">
+        <p class="example-category"></p><h2></h2><p class="example-description"></p>
+        <div class="example-prompt"><span class="example-prompt-label"></span><blockquote></blockquote></div>
+        <p class="example-details"></p>
+        <div class="example-controls"><button class="btn btn-primary example-start" type="button"></button><button class="btn btn-outline example-audio" type="button" hidden></button></div>
+        <p class="example-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+    </article>
+  </template>
+  <script src="script.js?v=examples1" type="module"></script>
+  <script src="examples.mjs?v=1" type="module"></script>
+</body>
+</html>

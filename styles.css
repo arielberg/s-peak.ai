@@ -1052,3 +1052,9 @@ section {
     padding: 3.5rem 0;
   }
 }
+
+/* Keep the expanded navigation readable on small laptops. */
+@media (min-width: 769px) and (max-width: 1050px) {
+  .nav-menu { gap: .8rem; }
+  .nav-menu a { font-size: .85rem; }
+}

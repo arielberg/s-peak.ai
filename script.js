@@ -14,6 +14,7 @@ const CFG = Object.assign(
 const translations = {
   en: {
     'nav.demo': 'Live demo',
+    'nav.examples': 'Examples',
     'nav.capabilities': 'Capabilities',
     'nav.connect': 'Connections',
     'nav.useCases': 'Use cases',
@@ -110,6 +111,7 @@ const translations = {
   },
   he: {
     'nav.demo': 'הדגמה חיה',
+    'nav.examples': 'דוגמאות',
     'nav.capabilities': 'יכולות',
     'nav.connect': 'חיבורים',
     'nav.useCases': 'שימושים',
@@ -230,6 +232,7 @@ function setLanguage(lang) {
   if (langText) langText.textContent = lang === 'en' ? 'עברית' : 'English';
 
   if (!talkActive) setTalkStatus(talkStatusKey || 'demo.ready');
+  document.dispatchEvent(new CustomEvent('speak:languagechange', { detail: { language: lang } }));
 }
 
 /* Navigation */
