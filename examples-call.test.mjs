@@ -45,17 +45,25 @@ test('each example calls its own internal flow and releases mic and connection',
     assert.equal(f.users.at(-1).handler.closed, true);
     assert.equal(f.audio.srcObject, null);
   }
-  assert.equal(f.tracks[0].stopped, 2);
+  assert.equal(f.tracks[0].stopped, examples.length);
 });
 
 test('only one call can connect at once; caller-supplied dial cannot override catalog', async () => {
   const f = fixture();
   await f.controller.start({ ...examples[0], dial: 'arbitrary-number' });
   await f.controller.start(examples[1]);
-  assert.deepEqual(f.calls, ['sip:406@example.test']);
+  assert.deepEqual(f.calls, ['sip:404@example.test']);
   await f.controller.end();
   await f.controller.start({ id: 'unknown', dial: '406' });
   assert.equal(f.controller.active, null);
+});
+
+test('the receptionist and existing demos keep their verified internal destinations', () => {
+  assert.deepEqual(examples.map(({ id, dial }) => ({ id, dial })), [
+    { id: 's-peak-receptionist', dial: '404' },
+    { id: 'kol-kav', dial: '406' },
+    { id: 'cafe-click', dial: '408' },
+  ]);
 });
 
 test('default fetch adapter does not bind the browser fetch receiver to the controller', async () => {

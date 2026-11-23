@@ -170,7 +170,7 @@ button:disabled { cursor: default; }
 .demo-actions:has([hidden]) { margin-top: 0; }
 #remoteAudio { display: none; }
 .contact-section { padding-block: 58px 38px; }
-.contact-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; align-items: start; padding: 53px; border: 1px solid #9cbbeb2b; border-radius: 10px; background: linear-gradient(90deg,#0b192cf5,#0b192cd9),url('assets/team-conversation.webp') left 42%/cover; }
+.contact-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; align-items: start; padding: 53px; border: 1px solid #9cbbeb2b; border-radius: 10px; background: linear-gradient(90deg,#0b192cf5,#0b192cd9),url('assets/team-virtual-representative.webp') left 42%/cover; }
 .contact-info { padding-top: 10px; }
 .contact-panel h2 { color: #eff5ff; font-size: 39px; font-weight: 500; line-height: 1.4; margin-bottom: 20px; }
 .contact-panel p { color: #a9bcd6; font-size: 16px; }

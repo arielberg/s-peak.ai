@@ -1,11 +1,11 @@
-import { examples } from './examples-catalog.mjs';
-import { ExampleCall } from './examples-call.mjs?v=2';
+import { examples } from './examples-catalog.mjs?v=3';
+import { ExampleCall } from './examples-call.mjs?v=3';
 
 const copy = {
   he: {
     pageTitle: 'דוגמאות לשיחה עם סוכני קול | s-peak.ai',
     skip: 'דילוג לתוכן', eyebrow: 'סוכני הקול של s-peak.ai', title: 'בואו לשמוע איך זה עובד.',
-    intro: 'בוחרים דוגמה, מפעילים את המיקרופון ומתחילים לדבר. כל סוכן מכיר עולם אחר — מהדרך לעבודה ועד הקפה של הבוקר.',
+    intro: 'מכירים את פקידת הקבלה שלנו, מתכננים נסיעה או מזמינים קפה. בוחרים דוגמה, מאשרים גישה למיקרופון ומתחילים לדבר.',
     note: 'ישירות מהדפדפן · ללא התקנה · שיחה בעברית',
     help: 'בהתחלת השיחה תתבקשו לאשר גישה למיקרופון. לסיום, לחצו על ״סיום שיחה״. בסביבה רועשת כדאי להשתמש באוזניות.',
     contactEyebrow: 'ומה הסוכן שלכם יעשה?', contactTitle: 'אותה שיחה טבעית. העסק שלכם.',
@@ -27,7 +27,7 @@ const copy = {
   en: {
     pageTitle: 'Voice agent examples | s-peak.ai',
     skip: 'Skip to content', eyebrow: 'VOICE AGENTS BY S-PEAK.AI', title: 'Hear how it works.',
-    intro: 'Pick an example, turn on your microphone, and start talking. Each agent knows a different world — from your commute to your morning coffee.',
+    intro: 'Meet our receptionist, plan a journey, or order a coffee. Pick an example, allow microphone access, and start talking.',
     note: 'In your browser · No installation · Conversations in Hebrew',
     help: 'Allow microphone access when the call starts. Choose “End call” to finish. Headphones help in noisy surroundings.',
     contactEyebrow: 'WHAT WILL YOUR AGENT DO?', contactTitle: 'Natural conversations. Your business.',
@@ -48,6 +48,7 @@ const copy = {
   },
 };
 const icons = {
+  headset: '<path d="M40 61V49a40 40 0 0 1 80 0v12M40 58h10v32H40a9 9 0 0 1-9-9V67a9 9 0 0 1 9-9Zm80 0h-10v32h10a9 9 0 0 0 9-9V67a9 9 0 0 0-9-9ZM115 90v6a15 15 0 0 1-15 15H86"/><rect x="73" y="105" width="16" height="10" rx="5"/><path d="M63 53v19m17-30v40m17-29v19"/>',
   bus: '<path d="M43 78V31c0-12 74-12 74 0v47M43 47h74M78 25v22M50 78h60M52 79v10m56-10v10M39 38h-8v20h8m82-20h8v20h-8"/><rect x="43" y="21" width="74" height="60" rx="10"/><path d="M54 63h9m34 0h9M25 97h110"/><circle cx="26" cy="23" r="3"/><path d="M134 68v10m-5-5h10"/>',
   coffee: '<path d="M48 42h62v29a27 27 0 0 1-27 27h-8a27 27 0 0 1-27-27V42Zm62 6h9a14 14 0 0 1 0 28h-10M38 99h91M64 10c-10 10 10 10 0 20m18-20c-10 10 10 10 0 20m18-20c-10 10 10 10 0 20"/><path d="M70 65c-5-8-17 1 8 16 25-15 13-24 8-16l-8 7-8-7Z" stroke-width="2"/>',
 };
@@ -123,7 +124,15 @@ function translate() {
   document.querySelectorAll('[data-examples-text]').forEach((el) => { el.textContent = text(el.dataset.examplesText); });
   for (const { el, example } of cards.values()) {
     const localized = example[lang()];
-    el.querySelector('h2').textContent = localized.name;
+    const heading = el.querySelector('h2');
+    heading.textContent = localized.name;
+    if (example.theme === 'receptionist') {
+      const [before, after = ''] = localized.name.split('s-peak.ai');
+      const brand = document.createElement('bdi');
+      brand.className = 'example-title-brand';
+      brand.textContent = 's-peak.ai';
+      heading.replaceChildren(document.createTextNode(before), brand, document.createTextNode(after));
+    }
     el.querySelector('.example-category').textContent = localized.category;
     el.querySelector('.example-description').textContent = localized.description;
     el.querySelector('.example-details').textContent = localized.details;

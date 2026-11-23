@@ -5,6 +5,7 @@ existing public SIP.js session endpoint and calls internal Asterisk extensions:
 
 | Example | Extension | Flow |
 | --- | --- | --- |
+| פקידת הקבלה של s-peak.ai / s-peak.ai receptionist | 404 | `lead` (Shiri, s-peak.ai) |
 | קול קו / Kol Kav | 406 | `transit_help` (`transit-assist`) |
 | קפה קליק / Cafe Click | 408 | `cafe_takeaway` |
 
@@ -13,6 +14,14 @@ PSTN calls. There is no fallback to the general ElevenLabs sales demo. Credentia
 are obtained at call time and never stored in the website source or localStorage.
 Only one example can connect at a time. End call, remote hangup, connection timeout
 and page exit release the microphone and SIP connection.
+
+The receptionist uses the existing s-peak.ai inbound `lead` flow. Its destination
+is verified against `voip-v4/infra/asterisk/extensions.conf` and
+`voip-v4/knowledge/engineering/patterns/inbound-routing.md`: internal extension
+404 runs Shiri with the s-peak.ai `lead` flow. The `lead` prompt identifies the
+company as s-peak.ai and supports product questions and inquiries. Extension 405
+is the separate Web Labs `office` flow and is not used here. This website update
+adds a front-end entry only; it does not create or change any backend flow.
 
 ## Add an example
 

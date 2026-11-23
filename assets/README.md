@@ -13,3 +13,11 @@ Production derivatives use WebP quality 85, encoding method 6. Color composition
 - `cafe-conversation.webp` — 1536 × 1024 px; 196,546 bytes; source `cafe-conversation.png`.
 
 The approved virtual-presence source is natively 1671 × 941 px.
+
+## Virtual-presence update
+
+Service and cafe scenes now use `team-virtual-representative.webp` and `cafe-virtual-representative.webp` throughout the site. Both retain 1536 × 1024 px framing, with blue translucent arms/torso contours, fine particles and holographic light filaments matching the approved hero. The enterprise team photograph depicts human business teams, rather than the virtual agent.
+
+- `team-virtual-representative.webp` — WebP quality 88, 217,266 bytes.
+- `cafe-virtual-representative.webp` — WebP quality 90, 252,130 bytes.
+- [Exact prompts and image provenance](virtual-image-prompts.md) — built-in image_gen edits.

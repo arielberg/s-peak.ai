@@ -1,4 +1,4 @@
-import { examples } from './examples-catalog.mjs';
+import { examples } from './examples-catalog.mjs?v=3';
 const AUDIO = { audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false };
 let sdkPromise;
 export function loadSip() {

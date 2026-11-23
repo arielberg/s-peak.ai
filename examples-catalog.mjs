@@ -2,6 +2,21 @@
 // extension (infra/asterisk/extensions.conf in voip-v4), never a PSTN number.
 export const examples = [
   {
+    id: 's-peak-receptionist', dial: '404', theme: 'receptionist', icon: 'headset',
+    he: {
+      name: 'פקידת הקבלה של s-peak.ai', category: 'קבלת שיחות לעסקים',
+      description: 'מכירים את הנציגה הווירטואלית שלנו: שואלים על סוכני הקול, מספרים על הצרכים של העסק ומשאירים פנייה לצוות.',
+      prompt: 'איך סוכן קולי יכול לעזור לעסק שלי?',
+      details: 'מענה ראשוני · מידע על השירות · קבלת פניות',
+    },
+    en: {
+      name: 's-peak.ai receptionist', category: 'Business call reception',
+      description: 'Meet our virtual receptionist: ask about voice agents, describe what your business needs, and leave an inquiry for the team.',
+      prompt: 'How could a voice agent help my business?',
+      details: 'First response · Service information · Inquiries',
+    },
+  },
+  {
     id: 'kol-kav', dial: '406', theme: 'transit', icon: 'bus',
     he: {
       name: 'קול קו', category: 'תחבורה ציבורית',
