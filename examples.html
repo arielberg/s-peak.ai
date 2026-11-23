@@ -6,15 +6,15 @@
   <title>דוגמאות לשיחה עם סוכני קול | s-peak.ai</title>
   <meta name="description" content="נסו שיחה מהדפדפן עם קול קו לתכנון נסיעה בתחבורה ציבורית ועם קפה קליק להזמנת קפה. דוגמאות לסוכני הקול של s-peak.ai.">
   <link rel="icon" href="logo-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=examples1">
-  <link rel="stylesheet" href="examples.css?v=1">
+  <link rel="stylesheet" href="styles.css?v=redesign1">
+  <link rel="stylesheet" href="examples.css?v=redesign1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="examples-page">
   <a class="skip-link" href="#main" data-examples-text="skip">דילוג לתוכן</a>
-  <nav class="navbar" aria-label="ניווט ראשי">
+  <nav class="navbar" aria-label="ניווט ראשי" data-i18n-aria="nav.label">
     <div class="container nav-wrapper">
       <a href="./" class="logo" aria-label="s-peak.ai">
         <img src="logo-mark.svg" alt="" class="logo-mark" width="42" height="42">
@@ -27,11 +27,11 @@
         <li><a href="./#contact" data-i18n="nav.contact">יצירת קשר</a></li>
       </ul>
       <button class="lang-toggle" id="langToggle" type="button" aria-label="Toggle language"><span id="langText">English</span></button>
-      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <header class="examples-intro container">
       <p class="examples-eyebrow" data-examples-text="eyebrow">סוכני הקול של s-peak.ai</p>
       <h1 data-examples-text="title">בואו לשמוע איך זה עובד.</h1>
@@ -55,7 +55,7 @@
     </section>
   </main>
 
-  <footer class="examples-footer container"><a class="logo" href="./" aria-label="s-peak.ai"><span class="logo-word" dir="ltr">s-peak<span class="logo-dot">.ai</span></span></a><p data-i18n="footer.copyright">© 2026 s-peak.ai. כל הזכויות שמורות.</p></footer>
+  <footer class="examples-footer container"><a class="logo" href="./" aria-label="s-peak.ai"><img src="logo-mark.svg" alt="" class="logo-mark" width="42" height="42"><span class="logo-word" dir="ltr">s-peak<span class="logo-dot">.ai</span></span></a><p data-i18n="footer.copyright">© 2026 s-peak.ai. כל הזכויות שמורות.</p></footer>
   <audio id="exampleAudio" autoplay playsinline></audio>
 
   <template id="exampleCard">
@@ -70,7 +70,7 @@
       </div>
     </article>
   </template>
-  <script src="script.js?v=examples1" type="module"></script>
+  <script src="script.js?v=redesign1" type="module"></script>
   <script src="examples.mjs?v=2" type="module"></script>
 </body>
 </html>

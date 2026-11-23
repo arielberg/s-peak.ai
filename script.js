@@ -14,6 +14,9 @@ const CFG = Object.assign(
 const translations = {
   en: {
     'nav.demo': 'Live demo',
+    'nav.skip': 'Skip to content',
+    'nav.menu': 'Toggle navigation',
+    'nav.label': 'Main navigation',
     'nav.examples': 'Examples',
     'nav.capabilities': 'Capabilities',
     'nav.connect': 'Connections',
@@ -111,6 +114,9 @@ const translations = {
   },
   he: {
     'nav.demo': 'הדגמה חיה',
+    'nav.skip': 'דילוג לתוכן',
+    'nav.menu': 'פתיחה וסגירה של תפריט הניווט',
+    'nav.label': 'ניווט ראשי',
     'nav.examples': 'דוגמאות',
     'nav.capabilities': 'יכולות',
     'nav.connect': 'חיבורים',
@@ -206,6 +212,148 @@ const translations = {
   },
 };
 
+/* Approved visual design copy. Text stays separate from structural markup. */
+Object.assign(translations.he, {
+  "design.businessDemo": "תיאום הדגמה לעסק",
+  "design.hearAgent": "שמעו את הסוכן",
+  "design.fact3": "הרשאות ובקרה",
+  "design.imageryLabel": "המחשה באמצעות AI",
+  "design.imageDisclosure": "התמונות באתר נוצרו באמצעות AI להמחשה.",
+  "design.navCapabilities": "יכולות",
+  "design.navConnections": "חיבורים",
+  "design.navExamples": "שימושים",
+  "design.navDemos": "דוגמאות",
+  "design.hearExamples": "שמעו דוגמאות לשיחה",
+  "design.talk": "תיאום הדגמה",
+  "design.eyebrow": "מכירות. שירות. תפעול.",
+  "design.title1": "סוכני קול לעסקים.",
+  "design.title2": "משיחה לפעולה.",
+  "design.description": "מענה ללקוחות, סינון לידים ותיאום פגישות — באמצעות סוכני AI שמחוברים ל־CRM, ליומן ולמערכות הארגון שלכם.",
+  "design.fact1": "עברית ואנגלית",
+  "design.fact2": "CRM וטלפוניה",
+  "design.callSample": "דוגמת שיחה · להמחשה",
+  "design.voiceCaption": "מקשיב. מבין. מבצע.",
+  "design.customerLine": "אפשר לתאם הדגמה לצוות המכירות?",
+  "design.actionTitle": "תיאום פגישה ועדכון CRM",
+  "design.actionDescription": "פעולות עסקיות, מתוך השיחה",
+  "design.capKicker": "תשתית לשיחות עסקיות",
+  "design.feature1Title": "נשמע טבעי. מבין הקשר.",
+  "design.feature1Description": "שיחה זורמת בעברית ובאנגלית, עם אפשרות להתפרץ באמצע ותשובות המבוססות על הידע הארגוני שלכם.",
+  "design.feature1Note": "הקשבה אמיתית, גם כשהשיחה משתנה",
+  "design.feature2Title": "מדבר וגם עושה.",
+  "design.feature2Description": "תיאום פגישות, עדכון לידים ופתיחת קריאות שירות. הסוכן פועל בזמן השיחה, דרך המערכות שכבר יש לכם.",
+  "design.feature2Note": "מהשיחה ישירות לתהליך העסקי",
+  "design.feature3Title": "הכללים הם שלכם.",
+  "design.feature3Description": "אתם מגדירים הרשאות, גבולות פעולה ומתי מעבירים לנציג אנושי. עם תיעוד שמאפשר להבין מה נעשה.",
+  "design.feature3Note": "אוטומציה עם שקיפות ובקרה",
+  "design.connectKicker": "עובד עם מה שכבר עובד אצלכם",
+  "design.connectLink": "בואו נתכנן את החיבור שלכם",
+  "design.nodeCRM": "לידים ולקוחות",
+  "design.nodeCalendar": "יומנים",
+  "design.nodeCalendarSub": "פגישות ותיאומים",
+  "design.nodePhone": "טלפוניה",
+  "design.nodePhoneSub": "שיחות נכנסות ויוצאות",
+  "design.nodeAPISub": "התהליכים שלכם",
+  "design.useKicker": "נבנה לעבודה של הצוותים שלכם",
+  "design.useTitle": "קול אחד. ערך בכל מחלקה.",
+  "design.use1Label": "מכירות",
+  "design.use1Title": "מענה ראשוני וסינון לידים.",
+  "design.use1Desc": "הבנת הצורך, איסוף פרטים ותיאום פגישות לצוות המכירות — ישירות מתוך השיחה.",
+  "design.use2Label": "שירות",
+  "design.use2Title": "שירות עם ההקשר הנכון.",
+  "design.use2Desc": "תשובות על בסיס הידע הארגוני, בדיקת סטטוס והעברה לנציג עם הפרטים הרלוונטיים.",
+  "design.use3Label": "תפעול",
+  "design.use3Title": "המידע הופך לפעולה.",
+  "design.use3Desc": "תיאום, פתיחת קריאות ועדכון נתונים במערכות פנימיות, בהתאם לכללים שאתם מגדירים.",
+  "design.contactKicker": "בואו נבחן את התהליך שלכם",
+  "design.contactTitle": "מה השיחה הבאה תוכל לקדם בעסק?",
+  "design.contactDescription": "נמפה את השיחות, נבחר את החיבורים ונתכנן פיילוט ממוקד לצוות שלכם.",
+  "design.footerText": "סוכני קול למכירות, שירות ותפעול.",
+  "design.virtualBadge": "נציגת AI לעסק שלכם",
+  "design.integrationLabel": "חיבור סוכן קול למערכות העסק",
+  "design.stripLabel1": "מתחבר לכלים",
+  "design.stripLabel2": "שהצוותים שלכם עובדים איתם.",
+  "design.capTitle1": "חוויה טבעית ללקוח.",
+  "design.capTitle2": "שליטה מלאה לעסק.",
+  "design.capDescription1": "מהמילה הראשונה ועד הפעולה האחרונה,",
+  "design.capDescription2": "הכול מחובר לתהליכים ולמערכות שלכם.",
+  "design.connectTitle1": "הקול החדש.",
+  "design.connectTitle2": "המערכות שלכם.",
+  "design.connectDescription1": "CRM, יומנים, טלפוניה וממשקים פנימיים.",
+  "design.connectDescription2": "שכבת שיחה חכמה, שמחברת בין הלקוחות",
+  "design.connectDescription3": "לבין מה שצריך לקרות בעסק."
+});
+Object.assign(translations.en, {
+  "design.businessDemo": "Book a business demo",
+  "design.hearAgent": "Hear the agent",
+  "design.fact3": "Permissions & control",
+  "design.imageryLabel": "AI-generated illustration",
+  "design.imageDisclosure": "Images on this site were created with AI for illustration.",
+  "design.navCapabilities": "Capabilities",
+  "design.navConnections": "Connections",
+  "design.navExamples": "Use cases",
+  "design.navDemos": "Examples",
+  "design.hearExamples": "Explore voice demos",
+  "design.talk": "Book a demo",
+  "design.eyebrow": "Sales. Service. Operations.",
+  "design.title1": "Voice agents for business.",
+  "design.title2": "From conversation to action.",
+  "design.description": "Answer customers, qualify leads, and book meetings with AI agents connected to your CRM, calendar, and business systems.",
+  "design.fact1": "Hebrew & English",
+  "design.fact2": "CRM & telephony",
+  "design.callSample": "Illustrative conversation",
+  "design.voiceCaption": "Listen. Understand. Act.",
+  "design.customerLine": "Can we book a demo for our sales team?",
+  "design.actionTitle": "Meeting booked. CRM updated.",
+  "design.actionDescription": "Business actions, during the call",
+  "design.capKicker": "Infrastructure for business conversations",
+  "design.feature1Title": "Natural voice. Real context.",
+  "design.feature1Description": "Fluid conversation in Hebrew and English, with natural interruptions and answers grounded in your company knowledge.",
+  "design.feature1Note": "Listening, even when the conversation changes",
+  "design.feature2Title": "Talks and takes action.",
+  "design.feature2Description": "Book meetings, update leads, and open support tickets. The agent acts during the call, through the systems you already use.",
+  "design.feature2Note": "From conversation to business workflow",
+  "design.feature3Title": "Your rules. Your control.",
+  "design.feature3Description": "Set permissions, action boundaries, and when to hand over to a person. Keep an audit trail of what happened.",
+  "design.feature3Note": "Automation with visibility and control",
+  "design.connectKicker": "Works with what works for you",
+  "design.connectLink": "Let’s plan your connection",
+  "design.nodeCRM": "Leads & customers",
+  "design.nodeCalendar": "Calendar",
+  "design.nodeCalendarSub": "Meetings & bookings",
+  "design.nodePhone": "Telephony",
+  "design.nodePhoneSub": "Inbound & outbound calls",
+  "design.nodeAPISub": "Your workflows",
+  "design.useKicker": "Built for the work your teams do",
+  "design.useTitle": "One voice. Value across teams.",
+  "design.use1Label": "Sales",
+  "design.use1Title": "First response. Qualified leads.",
+  "design.use1Desc": "Understand needs, capture details, and book meetings for the sales team directly during the conversation.",
+  "design.use2Label": "Service",
+  "design.use2Title": "Service with the right context.",
+  "design.use2Desc": "Answers grounded in company knowledge, status checks, and handover to a person with the relevant details.",
+  "design.use3Label": "Operations",
+  "design.use3Title": "Information becomes action.",
+  "design.use3Desc": "Book, open tickets, and update internal records according to the rules you define.",
+  "design.contactKicker": "Let’s explore your workflow",
+  "design.contactTitle": "What could your next conversation accomplish?",
+  "design.contactDescription": "Map your calls, choose the connections, and plan a focused pilot for your team.",
+  "design.footerText": "Voice agents for sales, service, and operations.",
+  "design.virtualBadge": "AI representative for your business",
+  "design.integrationLabel": "Voice agent connected to business systems",
+  "design.stripLabel1": "Connected to the tools",
+  "design.stripLabel2": "your teams already use.",
+  "design.capTitle1": "Natural for customers.",
+  "design.capTitle2": "Controlled by your business.",
+  "design.capDescription1": "From the first word to the final action,",
+  "design.capDescription2": "connected to your workflows and systems.",
+  "design.connectTitle1": "A new voice.",
+  "design.connectTitle2": "Your systems.",
+  "design.connectDescription1": "CRM, calendars, telephony, and internal APIs.",
+  "design.connectDescription2": "A conversational layer connecting customers",
+  "design.connectDescription3": "to what needs to happen in your business."
+});
+
 let currentLang = localStorage.getItem('speak-lang-v2') || 'he';
 
 function t(key) {
@@ -217,6 +365,7 @@ function setLanguage(lang) {
   localStorage.setItem('speak-lang-v2', lang);
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+  document.body.classList.toggle('english', lang === 'en');
 
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
@@ -267,7 +416,10 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     const target = document.querySelector(href);
     if (!target) return;
     e.preventDefault();
-    window.scrollTo({ top: target.offsetTop - 76, behavior: 'smooth' });
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const paused = document.documentElement.dataset.motion === 'paused';
+    target.scrollIntoView({ block: 'start', behavior: reduceMotion || paused ? 'instant' : 'smooth' });
+    if (anchor.classList.contains('skip-link')) target.focus({ preventScroll: true });
   });
 });
 
@@ -283,28 +435,6 @@ window.addEventListener('scroll', () => {
   });
   document.querySelectorAll('.nav-menu a').forEach((link) => {
     link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-  });
-});
-
-/* Fade-in cards */
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  },
-  { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-);
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.feature-card, .connect-card, .use-card').forEach((el, i) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = `opacity 0.55s ease ${i * 0.05}s, transform 0.55s ease ${i * 0.05}s`;
-    observer.observe(el);
   });
 });
 
