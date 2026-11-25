@@ -354,7 +354,8 @@ Object.assign(translations.en, {
   "design.connectDescription3": "to what needs to happen in your business."
 });
 
-let currentLang = localStorage.getItem('speak-lang-v2') || 'he';
+// Each directory serves its own language; saved preferences never override a shared URL.
+let currentLang = document.documentElement.lang === 'en' ? 'en' : 'he';
 
 function t(key) {
   return translations[currentLang]?.[key] || translations.he[key] || translations.en[key] || key;
@@ -362,7 +363,7 @@ function t(key) {
 
 function setLanguage(lang) {
   currentLang = lang;
-  localStorage.setItem('speak-lang-v2', lang);
+  try { localStorage.setItem('speak-lang-v2', lang); } catch { /* The URL also works when storage is unavailable. */ }
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
   document.body.classList.toggle('english', lang === 'en');
@@ -889,9 +890,14 @@ talkEndBtn?.addEventListener('click', () => hangupTalk(true));
 document.addEventListener('DOMContentLoaded', () => {
   setLanguage(currentLang);
 
-  document.getElementById('langToggle')?.addEventListener('click', () => {
-    setLanguage(currentLang === 'en' ? 'he' : 'en');
-  });
+  const languageLink = document.getElementById('langToggle');
+  const updateLanguageLink = () => {
+    if (languageLink?.dataset.languagePath) {
+      languageLink.href = languageLink.dataset.languagePath + window.location.hash;
+    }
+  };
+  updateLanguageLink();
+  window.addEventListener('hashchange', updateLanguageLink);
 
   const contactForm = document.getElementById('contactForm');
   const statusMessage = document.getElementById('statusMessage');

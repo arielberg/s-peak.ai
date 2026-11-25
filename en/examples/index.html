@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice agent examples | s-peak.ai</title>
+  <link rel="canonical" href="https://s-peak.ai/en/examples/">
+  <link rel="alternate" hreflang="he" href="https://s-peak.ai/examples/">
+  <link rel="alternate" hreflang="en" href="https://s-peak.ai/en/examples/">
+  <link rel="alternate" hreflang="x-default" href="https://s-peak.ai/examples/">
+  <meta name="description" content="Meet the s-peak.ai virtual receptionist, plan a journey with Kol Kav, or order with Cafe Click. Try voice agents in your browser. Demo conversations are currently in Hebrew.">
+  <link rel="icon" href="/logo-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css?v=energy5">
+  <link rel="stylesheet" href="/examples.css?v=energy5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="examples-page english">
+  <a class="skip-link" href="#main" data-examples-text="skip">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation" data-i18n-aria="nav.label">
+    <div class="container nav-wrapper">
+      <a href="/en/" class="logo" aria-label="s-peak.ai">
+        <img src="/logo-mark.svg" alt="" class="logo-mark" width="42" height="42">
+        <span class="logo-word" dir="ltr">s-peak<span class="logo-dot">.ai</span></span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="/en/#demo" data-i18n="nav.demo">Live demo</a></li>
+        <li><a href="/en/examples/" aria-current="page" data-i18n="nav.examples">Examples</a></li>
+        <li><a href="/en/#capabilities" data-i18n="nav.capabilities">Capabilities</a></li>
+        <li><a href="/en/#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <a class="lang-toggle" id="langToggle" href="/examples/" data-language-path="/examples/" hreflang="he" lang="he" aria-label="Switch to Hebrew"><span id="langText">עברית</span></a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <main id="main" tabindex="-1">
+    <header class="examples-intro container">
+      <p class="examples-eyebrow" data-examples-text="eyebrow">VOICE AGENTS BY S-PEAK.AI</p>
+      <h1 data-examples-text="title">Hear how it works.</h1>
+      <p class="examples-lead" data-examples-text="intro">Meet our receptionist, plan a journey, or order a coffee. Pick an example, allow microphone access, and start talking.</p>
+      <p class="examples-note"><span class="note-dot" aria-hidden="true"></span><span data-examples-text="note">In your browser · No installation · Live demos currently in Hebrew</span></p>
+    </header>
+
+    <section class="examples-gallery container" aria-label="Voice examples" id="examplesGallery"></section>
+    <noscript><p class="container">Enable JavaScript to start a call in your browser, or <a href="/en/#contact">contact us</a>.</p></noscript>
+
+    <aside class="examples-help container">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 14v-3a8 8 0 0 1 16 0v3M4 13H3v7h4v-7H4Zm16 0h1v7h-4v-7h3Z"/></svg>
+      <p data-examples-text="help">Allow microphone access when the call starts. Choose “End call” to finish. Headphones help in noisy surroundings.</p>
+    </aside>
+
+    <section class="examples-contact">
+      <div class="container examples-contact-inner">
+        <div><p class="examples-eyebrow" data-examples-text="contactEyebrow">WHAT WILL YOUR AGENT DO?</p><h2 data-examples-text="contactTitle">Natural conversations. Your business.</h2><p data-examples-text="contactText">Tell us which conversation you want to make easier.</p></div>
+        <a class="btn btn-primary" href="/en/#contact" data-examples-text="contactAction">Talk to us</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="examples-footer container"><a class="logo" href="/en/" aria-label="s-peak.ai"><img src="/logo-mark.svg" alt="" class="logo-mark" width="42" height="42"><span class="logo-word" dir="ltr">s-peak<span class="logo-dot">.ai</span></span></a><p data-i18n="footer.copyright">© 2026 s-peak.ai. All rights reserved.</p></footer>
+  <audio id="exampleAudio" autoplay playsinline></audio>
+
+  <template id="exampleCard">
+    <article class="example-card">
+      <div class="example-scene" aria-hidden="true"><span class="example-number"></span><svg class="example-illustration" viewBox="0 0 160 110" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></svg><span class="example-scene-label"></span></div>
+      <div class="example-body">
+        <p class="example-category"></p><h2></h2><p class="example-description"></p>
+        <div class="example-prompt"><span class="example-prompt-label"></span><blockquote></blockquote></div>
+        <p class="example-details"></p>
+        <div class="example-controls"><button class="btn btn-primary example-start" type="button"></button><button class="btn btn-outline example-audio" type="button" hidden></button></div>
+        <p class="example-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+    </article>
+  </template>
+  <script src="/script.js?v=routes1" type="module"></script>
+  <script src="/examples.mjs?v=routes1" type="module"></script>
+</body>
+</html>
