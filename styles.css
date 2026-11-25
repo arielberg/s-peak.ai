@@ -108,6 +108,7 @@ button:disabled { cursor: default; }
 .story-photo-wrap { position: absolute; inset: 0; z-index: -2; }
 .story-photo-wrap:after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg,#07142222 0%,#07142200 18%,#0714229c 43%,#071422fc 100%); }
 .story-photo { width: 100%; height: 100%; object-fit: cover; }
+.story-card:nth-child(1) .story-photo-wrap:after { background: linear-gradient(180deg,#07142214 0%,#07142200 32%,#07142240 60%,#071422fc 100%); }
 .story-card:nth-child(1) .story-photo { object-position: 24% 50%; }
 .story-card:nth-child(2) .story-photo { object-position: 48% 38%; }
 .story-card:nth-child(3) .story-photo { object-position: 50% 45%; }
@@ -128,7 +129,7 @@ button:disabled { cursor: default; }
 .card-note { display: block; color: #a0b8e1; border-top: 1px solid #ffffff0e; padding-top: 18px; margin-top: 25px; font-size: 14px; }
 /* Existing business systems. */
 .connections-section { position: relative; isolation: isolate; overflow: hidden; background: #0c192d; border-block: 1px solid #ffffff10; }
-.connections-section:before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#0a172ee8,#0a172eeb),url('assets/enterprise-background.webp') center 60%/cover; }
+.connections-section:before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#0a172ee8,#0a172eeb),url('assets/sales-virtual-representative-energy.webp') center 60%/cover; }
 .connections-inner { display: grid; grid-template-columns: 1fr 1.3fr; gap: 70px; align-items: center; padding-block: 67px; }
 .connections-copy h2 { font-size: 43px; color: #eaf0ff; font-weight: 500; line-height: 1.3; margin-bottom: 20px; }
 .connections-copy p { color: #a6b9d5; font-size: 16px; line-height: 1.9; }
@@ -170,7 +171,7 @@ button:disabled { cursor: default; }
 .demo-actions:has([hidden]) { margin-top: 0; }
 #remoteAudio { display: none; }
 .contact-section { padding-block: 58px 38px; }
-.contact-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; align-items: start; padding: 53px; border: 1px solid #9cbbeb2b; border-radius: 10px; background: linear-gradient(90deg,#0b192cf5,#0b192cd9),url('assets/team-virtual-representative-strong.webp') left 42%/cover; }
+.contact-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; align-items: start; padding: 53px; border: 1px solid #9cbbeb2b; border-radius: 10px; background: linear-gradient(90deg,#0b192cf5,#0b192cd9),url('assets/team-virtual-representative-energy.webp') left 42%/cover; }
 .contact-info { padding-top: 10px; }
 .contact-panel h2 { color: #eff5ff; font-size: 39px; font-weight: 500; line-height: 1.4; margin-bottom: 20px; }
 .contact-panel p { color: #a9bcd6; font-size: 16px; }

@@ -30,3 +30,16 @@ The active representative images now use the `-strong` versions on the homepage,
 - `virtual-representative-strong-mobile.webp` — 1000 × 563 px, quality 88.
 - `team-virtual-representative-strong.webp` — 1536 × 1024 px, quality 91.
 - `cafe-virtual-representative-strong.webp` — 1536 × 1024 px, quality 90.
+
+
+## Active energy-thread images — 2026-11-25
+
+These assets supersede the earlier strong-body images and the natural sales/team image wherever a representative appears. The central woman in the sales scene now matches our virtual representative, with a headset and broad cyan holographic body. A visible cyan energy thread connects each device to the representative and branches into her body mesh. Other people remain natural.
+
+- `sales-virtual-representative-energy.webp` — sales scene and integrations background; 1672 × 941 px.
+- `virtual-representative-energy.webp` — main hero and S-peak example; 1671 × 941 px.
+- `virtual-representative-energy-mobile.webp` — responsive hero; 1000 × 563 px.
+- `team-virtual-representative-energy.webp` — service scene and contact background; 1536 × 1024 px.
+- `cafe-virtual-representative-energy.webp` — operations/café scene; 1536 × 1024 px.
+
+Generated via the built-in image_gen tool. Exact prompts and output details are in [energy-image-prompts.md](energy-image-prompts.md). The preceding sections document earlier iterations.
