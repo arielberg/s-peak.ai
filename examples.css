@@ -19,9 +19,9 @@
 .example-card { min-width: 0; display: flex; flex-direction: column; border: 1px solid #27354e; border-radius: 12px; overflow: hidden; background: linear-gradient(145deg, #111d33, #0a1426); box-shadow: 0 18px 50px rgba(0, 0, 0, .14); transition: border-color .25s ease, box-shadow .25s ease; }
 .example-card:hover { border-color: #45618a; }
 .example-card.is-active { border-color: #7d9fff; box-shadow: 0 0 0 1px rgba(125, 159, 255, .28), 0 18px 50px rgba(0, 0, 0, .2); }
-.example-scene { position: relative; isolation: isolate; height: 225px; display: flex; align-items: flex-end; padding: 1.5rem; border-bottom: 1px solid #27354e; color: #edf3ff; background: #142238 url('assets/team-virtual-representative.webp') center 45% / cover; }
+.example-scene { position: relative; isolation: isolate; height: 225px; display: flex; align-items: flex-end; padding: 1.5rem; border-bottom: 1px solid #27354e; color: #edf3ff; background: #142238 url('assets/team-virtual-representative-strong.webp') center 45% / cover; }
 .example-scene::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(3, 10, 23, .17) 0%, rgba(3, 10, 23, .12) 32%, rgba(3, 10, 23, .88) 100%); }
-.example-card[data-theme="cafe"] .example-scene { background-image: url('assets/cafe-virtual-representative.webp'); background-position: center 45%; }
+.example-card[data-theme="cafe"] .example-scene { background-image: url('assets/cafe-virtual-representative-strong.webp'); background-position: center 45%; }
 .example-number { position: absolute; top: 1.25rem; inset-inline-start: 1.4rem; padding: .25rem .55rem; border: 1px solid rgba(236, 243, 255, .28); border-radius: 4px; background: rgba(5, 14, 31, .5); backdrop-filter: blur(10px); font-family: 'Outfit', sans-serif; font-size: .75rem; letter-spacing: .08em; font-weight: 500; }
 .example-scene-label { position: relative; font-size: .74rem; letter-spacing: .17em; font-family: 'Outfit', sans-serif; font-weight: 500; }
 .example-illustration { position: absolute; bottom: 1.1rem; inset-inline-end: 1.3rem; width: 66px; height: 46px; color: #c0d3ff; opacity: .95; stroke-width: 2; }
@@ -78,7 +78,7 @@
   min-height: 100%;
   border-bottom: 0;
   border-inline-start: 1px solid #27354e;
-  background-image: url('assets/virtual-representative.webp');
+  background-image: url('assets/virtual-representative-strong.webp');
   background-position: 10% center;
 }
 .example-card[data-theme="receptionist"] .example-body {

@@ -21,3 +21,12 @@ Service and cafe scenes now use `team-virtual-representative.webp` and `cafe-vir
 - `team-virtual-representative.webp` — WebP quality 88, 217,266 bytes.
 - `cafe-virtual-representative.webp` — WebP quality 90, 252,130 bytes.
 - [Exact prompts and image provenance](virtual-image-prompts.md) — built-in image_gen edits.
+
+## Stronger virtual body treatment
+
+The active representative images now use the `-strong` versions on the homepage, contact panel and all three example cards. Most of each visible torso, shoulders, arms and hands is rendered as translucent cyan holographic mesh and light. Faces and environments remain natural. These edits use the built-in image_gen tool; [the exact prompts and final asset paths](strong-virtual-image-prompts.md) are preserved. Earlier image variants remain versioned for comparison.
+
+- `virtual-representative-strong.webp` — 1671 × 941 px, quality 90.
+- `virtual-representative-strong-mobile.webp` — 1000 × 563 px, quality 88.
+- `team-virtual-representative-strong.webp` — 1536 × 1024 px, quality 91.
+- `cafe-virtual-representative-strong.webp` — 1536 × 1024 px, quality 90.
