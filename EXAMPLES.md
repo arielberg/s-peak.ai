@@ -1,6 +1,6 @@
 # Voice examples
 
-`/examples/` and `/en/examples/` are linked from their respective home page navigation and footer. Both routes are static directories with `index.html` files. The English page has English metadata, navigation, instructions, cards, controls and status messages. The actual demo flows remain in Hebrew for now. `examples.html` is retained only as a redirect for old links. The examples use the
+`/examples/` and `/en/examples/` are linked from their respective home page navigation and footer. Both routes are static directories with `index.html` files. The English page has English metadata, navigation, instructions, cards, controls and status messages. English calls use call-local English settings on the same business flows; Hebrew calls retain the existing settings. `examples.html` is retained only as a redirect for old links. The examples use the
 existing public SIP.js session endpoint and calls internal Asterisk extensions:
 
 | Example | Extension | Flow |
@@ -59,3 +59,8 @@ from these automated tests.
 - English examples: `/en/examples/` → `en/examples/index.html`.
 
 Language links navigate to the matching page in the other language and preserve the current section anchor. The URL/document language takes precedence over previously saved language preferences, including after reloads and direct visits. Internal page links use directory paths; shared scripts, styles and images use root-relative URLs so nested pages resolve them correctly. Canonical and hreflang links identify each language version. Keep the static localized markup and metadata in both versions synchronized when updating page content; shared dynamic translations stay in `script.js` and `examples.mjs`.
+
+
+## Call language
+
+The page language is fixed when the call controller is created. English pages choose only the catalog-owned `englishDial` alias; Hebrew pages keep the existing internal extension. Caller-supplied example objects cannot change either target. Both destinations enter the same business flow. Server aliases set the trusted, allowlisted `SPEAK_INITIAL_LANGUAGE=en` channel variable before session setup, so greeting, recognition and synthesis begin in English. No global agent settings or managed flow publication is changed.

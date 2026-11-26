@@ -154,3 +154,21 @@ test('blocked autoplay keeps the call active so the visitor can enable audio', a
   assert.ok(f.controller.active);
   await f.controller.end();
 });
+
+
+test('English examples use their own fixed language aliases on the same flows', async () => {
+  const f = fixture({ language: 'en' });
+  for (const example of examples) {
+    await f.controller.start({ ...example, dial: 'override', englishDial: 'override' });
+    assert.equal(f.calls.at(-1), `sip:${example.englishDial}@example.test`);
+    await f.controller.end();
+  }
+  assert.deepEqual(f.calls, ['sip:weblabs-lead-en@example.test', 'sip:weblabs-transit-en@example.test', 'sip:weblabs-cafe-en@example.test']);
+});
+
+test('unknown page language keeps the existing Hebrew destinations', async () => {
+  const f = fixture({ language: 'arbitrary' });
+  await f.controller.start(examples[0]);
+  assert.deepEqual(f.calls, ['sip:404@example.test']);
+  await f.controller.end();
+});

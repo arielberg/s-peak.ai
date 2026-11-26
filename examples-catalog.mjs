@@ -2,7 +2,7 @@
 // extension (infra/asterisk/extensions.conf in voip-v4), never a PSTN number.
 export const examples = [
   {
-    id: 's-peak-receptionist', dial: '404', theme: 'receptionist', icon: 'headset',
+    id: 's-peak-receptionist', englishDial: 'weblabs-lead-en', dial: '404', theme: 'receptionist', icon: 'headset',
     he: {
       name: 'פקידת הקבלה של s-peak.ai', category: 'קבלת שיחות לעסקים',
       description: 'מכירים את הנציגה הווירטואלית שלנו: שואלים על סוכני הקול, מספרים על הצרכים של העסק ומשאירים פנייה לצוות.',
@@ -17,7 +17,7 @@ export const examples = [
     },
   },
   {
-    id: 'kol-kav', dial: '406', theme: 'transit', icon: 'bus',
+    id: 'kol-kav', englishDial: 'weblabs-transit-en', dial: '406', theme: 'transit', icon: 'bus',
     he: {
       name: 'קול קו', category: 'תחבורה ציבורית',
       description: 'אומרים מאיפה יוצאים ולאן רוצים להגיע, ומקבלים הכוונה לנסיעה בתחבורה ציבורית — בשיחה פשוטה.',
@@ -32,7 +32,7 @@ export const examples = [
     },
   },
   {
-    id: 'cafe-click', dial: '408', theme: 'cafe', icon: 'coffee',
+    id: 'cafe-click', englishDial: 'weblabs-cafe-en', dial: '408', theme: 'cafe', icon: 'coffee',
     he: {
       name: 'קפה קליק', category: 'בית קפה',
       description: 'מזמינים קפה ומשהו ליד, שואלים על התפריט ומתאימים את ההזמנה לטעם שלכם. הסוכנת מסכמת את הכול לפני האישור.',

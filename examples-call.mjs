@@ -1,4 +1,4 @@
-import { examples } from './examples-catalog.mjs?v=3';
+import { examples } from './examples-catalog.mjs?v=call-language1';
 const AUDIO = { audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false };
 let sdkPromise;
 export function loadSip() {
@@ -18,10 +18,11 @@ async function bounded(fn) {
 // One owner for the microphone, SIP connection and connecting/active call.
 // Dependencies are injectable so cancellation and routing can be tested offline.
 export class ExampleCall {
-  constructor({ apiBase, userId = 'shiri', audio, onState, fetcher = (...args) => fetch(...args),
+  constructor({ apiBase, userId = 'shiri', language = 'he', audio, onState, fetcher = (...args) => fetch(...args),
     getMedia = (constraints) => navigator.mediaDevices.getUserMedia(constraints), loadSdk = loadSip,
     connectTimeout = 45000 }) {
     Object.assign(this, { apiBase, userId, audio, onState, fetcher, getMedia, loadSdk, connectTimeout });
+    this.language = language === 'en' ? 'en' : 'he';
     this.active = null;
   }
 
@@ -85,7 +86,8 @@ export class ExampleCall {
       await user.connect();
       this.check(call);
       // Outgoing authenticated INVITE needs no registration or incoming-call contact.
-      await user.call(`sip:${configured.dial}@${config.sipDomain}`);
+      const dial = this.language === 'en' ? configured.englishDial : configured.dial;
+      await user.call(`sip:${dial}@${config.sipDomain}`);
       this.check(call);
     } catch (error) {
       if (!this.current(call)) {

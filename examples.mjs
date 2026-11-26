@@ -1,5 +1,5 @@
-import { examples } from './examples-catalog.mjs?v=routes1';
-import { ExampleCall } from './examples-call.mjs?v=3';
+import { examples } from './examples-catalog.mjs?v=call-language1';
+import { ExampleCall } from './examples-call.mjs?v=call-language1';
 
 const copy = {
   he: {
@@ -28,13 +28,13 @@ const copy = {
     pageTitle: 'Voice agent examples | s-peak.ai',
     skip: 'Skip to content', eyebrow: 'VOICE AGENTS BY S-PEAK.AI', title: 'Hear how it works.',
     intro: 'Meet our receptionist, plan a journey, or order a coffee. Pick an example, allow microphone access, and start talking.',
-    note: 'In your browser · No installation · Live demos currently in Hebrew',
+    note: 'In your browser · No installation · Conversations in English',
     help: 'Allow microphone access when the call starts. Choose “End call” to finish. Headphones help in noisy surroundings.',
     contactEyebrow: 'WHAT WILL YOUR AGENT DO?', contactTitle: 'Natural conversations. Your business.',
     contactText: 'Tell us which conversation you want to make easier.', contactAction: 'Talk to us',
-    try: 'Example question (English translation)', start: 'Start a call', end: 'End call', cancel: 'Cancel connection', play: 'Enable audio',
-    ready: 'Ready — speak in Hebrew', connecting: 'Connecting… allow microphone access when prompted.',
-    live: 'Connected — speak in Hebrew', closing: 'Ending the call…', ended: 'Call ended. You can try again.',
+    try: 'Try asking', start: 'Start a call', end: 'End call', cancel: 'Cancel connection', play: 'Enable audio',
+    ready: 'Click to talk to the agent', connecting: 'Connecting… allow microphone access when prompted.',
+    live: 'Connected — you can speak now', closing: 'Ending the call…', ended: 'Call ended. You can try again.',
     busy: 'End your current call to try another example.',
     audioBlocked: 'Connected. Select “Enable audio” to hear the agent.',
     timeout: 'The connection took too long. Please try again.', disconnected: 'Connection lost. You can try again.',
@@ -60,6 +60,7 @@ let activeId = null;
 let lang = () => document.documentElement.lang === 'en' ? 'en' : 'he';
 let text = (key) => copy[lang()][key];
 const controller = new ExampleCall({
+  language: lang(),
   apiBase: window.SPEAK_CONFIG?.apiBase || 'https://162-35-181-76.sslip.io:8443',
   userId: window.SPEAK_CONFIG?.webrtcUserId || 'shiri', audio,
   onState(id, state) {

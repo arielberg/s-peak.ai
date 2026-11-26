@@ -727,7 +727,7 @@ async function startSipTalk() {
   const domain = session.sipDomain || new URL(base).hostname;
   const sipUser = session.sipUser || 'speak_guest';
   const aor = session.sipUri || `sip:${sipUser}@${domain}`;
-  const dial = session.dial || 'weblabs';
+  const dial = currentLang === 'en' ? 'weblabs-lead-en' : session.dial || 'weblabs';
   const target = dial.includes('@') ? dial : `sip:${dial}@${domain}`;
   const remoteAudio = document.getElementById('remoteAudio');
 
